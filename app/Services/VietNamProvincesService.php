@@ -37,7 +37,7 @@ class VietNamProvincesService
             return null;
         }
 
-        return $collection->where('code', $parentCode);
+        return $collection->where('code', $parentCode)->pluck($column)->first();
     }
 
     private static function baseGetRequest(string $api): ?Collection
