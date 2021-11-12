@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Actions\Role\CreateRoleAction;
+use App\Actions\Role\DeleteRoleAction;
 use App\Actions\Role\ShowDetailRoleAction;
 use App\Actions\Role\ShowListRoleAction;
 use App\Actions\Role\UpdateRoleAction;
@@ -71,17 +72,12 @@ class RoleController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
+     * @param \App\Actions\Role\DeleteRoleAction $action
      * @param \App\Models\Role $role
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
      */
-    public function destroy(Role $role): JsonResponse
+    public function destroy(DeleteRoleAction $action, Role $role): JsonResponse
     {
-        if ($role->name === RoleType::ADMIN) {
-            throw new DeleteRoleDefaulException();
-        }
-        $role->delete();
-
-        return $this->noContent();
+        return ($action)($role);
     }
 }
