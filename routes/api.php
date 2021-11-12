@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CityController;
+use App\Http\Controllers\API\DistrictController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +31,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
 });
+
+Route::apiResource('cities', CityController::class)->only(['index', 'show']);
+Route::apiResource('districts', DistrictController::class)->only(['show']);
