@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'gender'            => $this->faker->boolean,
             'date_of_birth'     => $this->faker->dateTimeBetween('-30 years', 'now', config('app.timezone')),
             'email_verified_at' => now(),
-            'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password'          => 'password', // password
             'remember_token'    => Str::random(10),
         ];
     }
