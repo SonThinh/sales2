@@ -51,10 +51,10 @@ class Handler extends ExceptionHandler
     /**
      * @param $request
      * @param \Throwable $e
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Throwable
      */
-    public function render($request, Throwable $e)
+    public function render($request, Throwable $e): \Illuminate\Http\JsonResponse
     {
         switch (true) {
             case $e instanceof ValidationException:
@@ -63,6 +63,7 @@ class Handler extends ExceptionHandler
             case $e instanceof AuthenticationException:
             case $e instanceof AuthorizationException:
                 return $this->unauthorized();
+            case $e instanceof DeleteRoleDefaulException:
             case $e instanceof TokenInvalidException:
                 return $this->forbidden();
             case $e instanceof NotFoundHttpException:
