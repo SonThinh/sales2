@@ -29,6 +29,7 @@ class ShowListUserAction extends BaseAction
     public function __invoke(): JsonResponse
     {
         $user = User::query()
+                    ->listUser()
                     ->filter($this->userFilter)
                     ->sortBy($this->userSort)
                     ->paginate($this->per_page);
