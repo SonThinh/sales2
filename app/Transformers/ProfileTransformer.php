@@ -12,7 +12,10 @@ class ProfileTransformer extends Transformer
      *
      * @var string[]
      */
-    protected $relations = [];
+    protected $relations = [
+        'roles'       => RoleTransformer::class,
+        'permissions' => PermissionTransformer::class,
+    ];
 
     /**
      * List of autoloaded default relations.
@@ -30,7 +33,7 @@ class ProfileTransformer extends Transformer
     public function transform(User $user)
     {
         return [
-            'id'    => (string) $user->id,
+            'id'    => $user->id,
             'name'  => (string) $user->name,
             'email' => (string) $user->email,
         ];
