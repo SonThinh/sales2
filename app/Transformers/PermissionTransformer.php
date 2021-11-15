@@ -2,10 +2,10 @@
 
 namespace App\Transformers;
 
-use App\Models\User;
 use Flugg\Responder\Transformers\Transformer;
+use Spatie\Permission\Models\Permission;
 
-class ProfileTransformer extends Transformer
+class PermissionTransformer extends Transformer
 {
     /**
      * List of available relations.
@@ -13,8 +13,7 @@ class ProfileTransformer extends Transformer
      * @var string[]
      */
     protected $relations = [
-        'roles'       => RoleTransformer::class,
-        'permissions' => PermissionTransformer::class,
+        'roles' => RoleTransformer::class
     ];
 
     /**
@@ -27,15 +26,15 @@ class ProfileTransformer extends Transformer
     /**
      * Transform the model.
      *
-     * @param \App\Models\User $user
+     * @param \Spatie\Permission\Models\Permission $permission
      * @return array
      */
-    public function transform(User $user)
+    public function transform(Permission $permission)
     {
         return [
-            'id'    => $user->id,
-            'name'  => (string) $user->name,
-            'email' => (string) $user->email,
+            'id'           => $permission->id,
+            'name'         => (string) $permission->name,
+            'display_name' => (string) $permission->display_name,
         ];
     }
 }

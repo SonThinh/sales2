@@ -2,10 +2,10 @@
 
 namespace App\Transformers;
 
-use App\Models\User;
+use App\Models\City;
 use Flugg\Responder\Transformers\Transformer;
 
-class ProfileTransformer extends Transformer
+class CityTransformer extends Transformer
 {
     /**
      * List of available relations.
@@ -13,8 +13,7 @@ class ProfileTransformer extends Transformer
      * @var string[]
      */
     protected $relations = [
-        'roles'       => RoleTransformer::class,
-        'permissions' => PermissionTransformer::class,
+        'districts' => DistrictTransformer::class,
     ];
 
     /**
@@ -24,18 +23,20 @@ class ProfileTransformer extends Transformer
      */
     protected $load = [];
 
+
     /**
      * Transform the model.
      *
-     * @param \App\Models\User $user
+     * @param \App\Models\City $city
      * @return array
      */
-    public function transform(User $user)
+    public function transform(City $city)
     {
         return [
-            'id'    => $user->id,
-            'name'  => (string) $user->name,
-            'email' => (string) $user->email,
+            'id'            => $city->id,
+            'name'          => (string) $city->name,
+            'code'          => $city->code,
+            'division_type' => (string) $city->division_type,
         ];
     }
 }

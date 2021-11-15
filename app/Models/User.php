@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Builders\Auth\UserBuilder;
+use App\Builders\UserBuilder;
+use App\Enums\RoleType;
 use App\Traits\HasUuid;
 use App\Traits\OverridesBuilder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -17,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, OverridesBuilder;
 
-    public function provideCustomBuilder()
+    public function provideCustomBuilder(): string
     {
         return UserBuilder::class;
     }
@@ -91,6 +92,17 @@ class User extends Authenticatable implements JWTSubject
         return 'email';
     }
 
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        if ($this->roles->where('name', RoleType::ADMIN)->first()) {
+            return true;
+        }
+
+        return false;
+    }
     // ======================================================================
     // Accessors & Mutators
     // ======================================================================
