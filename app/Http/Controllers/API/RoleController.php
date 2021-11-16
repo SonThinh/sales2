@@ -7,8 +7,6 @@ use App\Actions\Role\DeleteRoleAction;
 use App\Actions\Role\ShowDetailRoleAction;
 use App\Actions\Role\ShowListRoleAction;
 use App\Actions\Role\UpdateRoleAction;
-use App\Enums\RoleType;
-use App\Exceptions\DeleteRoleDefaulException;
 use App\Http\Requests\Role\CreateRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Models\Role;

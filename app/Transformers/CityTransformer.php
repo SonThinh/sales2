@@ -2,10 +2,10 @@
 
 namespace App\Transformers;
 
+use App\Models\City;
 use Flugg\Responder\Transformers\Transformer;
-use Spatie\Permission\Models\Permission;
 
-class PermissionTransformer extends Transformer
+class CityTransformer extends Transformer
 {
     /**
      * List of available relations.
@@ -13,7 +13,7 @@ class PermissionTransformer extends Transformer
      * @var string[]
      */
     protected $relations = [
-        'roles' => RoleTransformer::class
+        'districts' => DistrictTransformer::class,
     ];
 
     /**
@@ -23,18 +23,20 @@ class PermissionTransformer extends Transformer
      */
     protected $load = [];
 
+
     /**
      * Transform the model.
      *
-     * @param \Spatie\Permission\Models\Permission $permission
+     * @param \App\Models\City $city
      * @return array
      */
-    public function transform(Permission $permission)
+    public function transform(City $city)
     {
         return [
-            'id'           => $permission->id,
-            'name'         => (string) $permission->name,
-            'display_name' => (string) $permission->display_name,
+            'id'            => $city->id,
+            'name'          => (string) $city->name,
+            'code'          => $city->code,
+            'division_type' => (string) $city->division_type,
         ];
     }
 }
