@@ -31,7 +31,7 @@ class DummyDataSeeder extends Seeder
         $admin->syncRoles(Role::where('name', RoleType::ADMIN)->first());
 
         User::factory(5)->create()->each(function ($staff){
-            $staff->syncRoles(Role::where('name', RoleType::MANAGER)->first());
+            $staff->syncRoles(Role::where('name', 'manager')->first());
         });
         User::factory(14)->create();
     }

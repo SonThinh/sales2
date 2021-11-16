@@ -39,8 +39,8 @@ class RolesAndPermissionsSeeder extends Seeder
         $adminRole->syncPermissions(Permission::all());
         // Create manager role
         $managerRole = Role::updateOrCreate([
-            'name'         => RoleType::MANAGER,
-            'display_name' => RoleType::getKey(RoleType::MANAGER),
+            'name'         => 'manager',
+            'display_name' => 'MANAGER',
         ]);
         $managerRole->syncPermissions(Permission::query()
                                                 ->where('name', 'like', 'VIEW-USER')
