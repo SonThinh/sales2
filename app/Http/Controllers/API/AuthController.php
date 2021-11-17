@@ -7,6 +7,7 @@ use App\Actions\Auth\LogoutAction;
 use App\Actions\Auth\RefreshTokenAction;
 use App\Actions\Auth\RegisterUserAction;
 use App\Actions\Auth\ShowProfileAction;
+use App\Http\Requests\Auth\CheckLoginRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterUserRequest;
@@ -25,14 +26,14 @@ class AuthController extends ApiController
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\Auth\CheckLoginRequest $request
      * @param LoginAction $action
      *
      * @return JsonResponse
      */
-    public function login(Request $request, LoginAction $action): JsonResponse
+    public function login(CheckLoginRequest $request, LoginAction $action): JsonResponse
     {
-        return ($action)($request->only('email', 'password'));
+        return ($action)($request->validated());
     }
 
     /**
