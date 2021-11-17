@@ -8,5 +8,5 @@ final class RoleType extends Enum
 {
     public const ADMIN = 'admin';
 
-    public const MANAGER = 'manager';
+    public const USER = 'user';
 }

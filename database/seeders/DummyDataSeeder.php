@@ -18,10 +18,10 @@ class DummyDataSeeder extends Seeder
     public function run()
     {
         $admin = User::create([
-            'email'             => 'admin@gmail.com',
+            'email'             => null,
             'name'              => 'admin',
             'password'          => '123456',
-            'phone'             => '0900000000',
+            'phone'             => null,
             'gender'            => null,
             'date_of_birth'     => null,
             'email_verified_at' => now(),
@@ -31,7 +31,7 @@ class DummyDataSeeder extends Seeder
         $admin->syncRoles(Role::where('name', RoleType::ADMIN)->first());
 
         User::factory(5)->create()->each(function ($staff){
-            $staff->syncRoles(Role::where('name', RoleType::MANAGER)->first());
+            $staff->syncRoles(Role::where('name', 'manager')->first());
         });
         User::factory(14)->create();
     }

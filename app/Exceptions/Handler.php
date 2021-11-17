@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Traits\HandleErrorException;
+use Flugg\Responder\Exceptions\Http\PageNotFoundException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -68,6 +69,7 @@ class Handler extends ExceptionHandler
                 return $this->forbidden();
             case $e instanceof NotFoundHttpException:
             case $e instanceof ModelNotFoundException:
+            case $e instanceof PageNotFoundException:
                 return $this->notFound();
             default:
                 return $this->serverError($e->getMessage());
