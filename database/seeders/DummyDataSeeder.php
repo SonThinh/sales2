@@ -24,7 +24,6 @@ class DummyDataSeeder extends Seeder
             'phone'             => null,
             'gender'            => null,
             'date_of_birth'     => null,
-            'email_verified_at' => now(),
             'remember_token'    => Str::random(10),
         ]);
         // assign admin role to admin

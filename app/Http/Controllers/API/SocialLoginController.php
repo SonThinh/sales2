@@ -2,33 +2,34 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Actions\Auth\HandleSocialCallbackAction;
-use App\Actions\Auth\ValidateProviderAction;
-use App\Http\Controllers\Controller;
+use App\Actions\Auth\RedirectProviderAction;
+use App\Enums\Socials;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Facades\Route;
-use App\Actions\Auth\LoginAction;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
-class SocialLoginController extends Controller
+class SocialLoginController extends ApiController
 {
-
-    public function redirectToSocial($provider, Request $request, ValidateProviderAction $validateAction, HandleSocialCallbackAction $handleAction)
+    /**
+     * @param $driver
+     * @param \App\Actions\Auth\RedirectProviderAction $action
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToSocial($driver, RedirectProviderAction $action)
     {
-        $params = ['state','scope'];
-
-        if($request->has($params)) {
-            return ($handleAction)($provider);
+        if (! $this->checkIsValidDriver($driver)) {
+            return $this->error()
+                        ->data(['message' => 'Social not supported!'])
+                        ->respond(JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        return ($validateAction)($provider);
+        return ($action)($driver);
     }
 
-    public function redirectToLine($provider, HandleSocialCallbackAction $handleAction)
+    /**
+     * @param $driver
+     * @return bool
+     */
+    public static function checkIsValidDriver($driver): bool
     {
-        return ($handleAction)($provider);
+        return in_array($driver, Socials::asArray());
     }
-
 }

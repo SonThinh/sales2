@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\SocialLoginController;
-use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +13,4 @@ use Laravel\Socialite\Facades\Socialite;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Socials login
-Route::get('/login/{provider}',[SocialLoginController::class, 'redirectToSocial']);
-Route::get('/login/{provider}/callback',[SocialLoginController::class, 'redirectToLine']);
+Route::get('login/{driver}',[SocialLoginController::class, 'redirectToSocial']);
