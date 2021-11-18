@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Actions\Auth\LoginAction;
+use App\Actions\Auth\LoginSocialAction;
 use App\Actions\Auth\LogoutAction;
 use App\Actions\Auth\RefreshTokenAction;
 use App\Actions\Auth\RegisterUserAction;
 use App\Actions\Auth\ShowProfileAction;
 use App\Http\Requests\Auth\CheckLoginRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use App\Http\Requests\RegisterUserRequest;
-
 
 class AuthController extends ApiController
 {
@@ -34,6 +33,23 @@ class AuthController extends ApiController
     public function login(CheckLoginRequest $request, LoginAction $action): JsonResponse
     {
         return ($action)($request->validated());
+    }
+
+    /**
+     * @param $driver
+     * @param \App\Actions\Auth\LoginSocialAction $action
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function socialLogin($driver, LoginSocialAction $action): JsonResponse
+    {
+        if (! SocialLoginController::checkIsValidDriver($driver)) {
+            return $this->error()
+                        ->data(['message' => 'Social not supported!'])
+                        ->respond(JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        return ($action)($driver);
     }
 
     /**

@@ -2,28 +2,35 @@
 
 namespace App\Actions\Auth;
 
+use App\Actions\BaseAction;
 use App\Enums\RoleType;
-use App\Traits\HttpResponse;
 use Flugg\Responder\Exceptions\Http\PageNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class LoginAction
+class LoginAction extends BaseAction
 {
-    use HttpResponse;
-
     /**
      * @param $credentials
      * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke($credentials): JsonResponse
     {
+        return $this->execute($credentials);
+    }
+
+    /**
+     * @param $credentials
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function execute($credentials): JsonResponse
+    {
         if (! $token = JWTAuth::attempt($this->credentials($credentials))) {
             return $this->error('unauthenticated')->respond(JsonResponse::HTTP_UNAUTHORIZED);
         }
 
-        if (auth()->user()->roles->first()->name === Arr::get($credentials, 'guard')) {
+        if (optional(auth()->user()->roles)->first()->name === Arr::get($credentials, 'guard')) {
             return $this->generateToken($token);
         }
         throw new PageNotFoundException();

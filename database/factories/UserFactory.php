@@ -20,7 +20,6 @@ class UserFactory extends Factory
             'phone'             => vnfaker()->mobilephone(),
             'gender'            => $this->faker->boolean,
             'date_of_birth'     => $this->faker->dateTimeBetween('-30 years', 'now', config('app.timezone')),
-            'email_verified_at' => now(),
             'password'          => 'password', // password
             'remember_token'    => Str::random(10),
         ];
