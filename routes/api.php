@@ -36,7 +36,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('permissions', PermissionController::class);
+    Route::apiResource('products', ProductController::class);
 });
-Route::apiResource('products', ProductController::class);
+//Route::apiResource('products', ProductController::class);
 Route::apiResource('cities', CityController::class)->only(['index', 'show']);
 Route::apiResource('districts', DistrictController::class)->only(['show']);
