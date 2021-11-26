@@ -2,14 +2,18 @@
 
 namespace App\Services;
 
-use App\Models\Product;
-use App\Actions\BaseAction;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
 
 class HandleImageService
 {
+    /**
+     * handleUploadImage(): store image and attach to model
+     * @param $modelType
+     * @param $data
+     * @return Model
+     */
     public function handleUploadImage($modelType, $data): Model
     {
         $uploadedFile = $data['image']->store('stored_images');
@@ -22,18 +26,26 @@ class HandleImageService
         ]);
     }
 
+    /**
+     * handleUpdateImage(): handle uploaded image and change it
+     * @param $modelType
+     * @param $data
+     * @return Model|mixed
+     */
     public function handleUpdateImage($modelType, $data)
     {
-        $uploadedFile = $data['image']->store('stored_images');
-        $oldFile = $modelType->files->file_path;
-
-        if($uploadedFile == $oldFile) {
-            return null;
+        if(!array_key_exists('image',$data)) {
+            return $modelType->files->first();
         }
-        $modelType->files()->delete();
-        $this->handleUploadImage($modelType, $data);
+        $this->handleDeleteImage($modelType);
+
+        return $this->handleUploadImage($modelType, $data);
     }
 
+    /**
+     * handleDeleteImage(): delete a file that relation with a model
+     * @param $modelType
+     */
     public function handleDeleteImage($modelType)
     {
         $modelType->files()->delete();

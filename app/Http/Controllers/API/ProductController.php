@@ -57,7 +57,6 @@ class ProductController extends Controller
         return ($action)($product);
     }
 
-
     /**
      * Update the specified resource in storage.
      * @param UpdateProductRequest $request

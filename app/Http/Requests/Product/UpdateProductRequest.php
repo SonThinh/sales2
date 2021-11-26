@@ -14,11 +14,11 @@ class UpdateProductRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'product_name'	    => 'sometimes|string|unique:products,product_name'.$this->product->id,
+            'product_name'	    => 'sometimes|string|unique:products,product_name,'.$this->product->id,
             'description'	    => 'sometimes|string|min:20',
             'price'	            => 'sometimes|int|min:1000',
             'discount'	        => 'sometimes|int',
-            'image'	            => 'sometimes|mimes:jpeg,jpg,png,gif',
+            'image'	            => 'nullable|mimes:jpeg,jpg,png,gif',
             'is_free_shipping'  => 'sometimes|int|min:0|max:1',
             'is_hot'	        => 'sometimes|int|min:0|max:1',
             'category_id'       => 'sometimes|int|exists:categories,id'
