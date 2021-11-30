@@ -2,7 +2,7 @@
 
 namespace App\Builders;
 
-class SinglePageBuilder
+class SinglePageBuilder extends Builder
 {
 
 }

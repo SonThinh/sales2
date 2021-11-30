@@ -1,8 +1,17 @@
 <?php
 
+
 namespace App\Sorts;
 
-class SinglePageSort
-{
+use App\Sorts\Sort;
+use App\Traits\CommonSort;
 
+class SinglePageSort extends Sort
+{
+    use CommonSort;
+
+    public function name($direction)
+    {
+        return $this->query->orderBy('content', $direction);
+    }
 }
