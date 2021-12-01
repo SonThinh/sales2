@@ -4,10 +4,12 @@ namespace App\Models;
 
 use App\Builders\UserBuilder;
 use App\Enums\RoleType;
+use App\Enums\Socials;
 use App\Traits\HasUuid;
 use App\Traits\OverridesBuilder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -35,6 +37,9 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'gender',
         'date_of_birth',
+        'avatar',
+        'provider_id',
+        'provider_name',
     ];
 
     /**
