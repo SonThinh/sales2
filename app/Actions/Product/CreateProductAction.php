@@ -8,8 +8,6 @@ use App\Services\HandleImageService;
 use App\Transformers\ProductTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Arr;
-use App\Models\File;
 
 class CreateProductAction extends BaseAction
 {
