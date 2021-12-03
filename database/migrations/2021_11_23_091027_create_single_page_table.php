@@ -16,6 +16,7 @@ class CreateSinglePageTable extends Migration
         Schema::create('single_page', function (Blueprint $table) {
             $table->id();
             $table->string('content');
+            $table->string('slug');
             $table->timestamps();
         });
     }
