@@ -19,8 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->integer('price');
             $table->integer('discount');
-            $table->boolean('is_free_shipping');
-            $table->boolean('is_hot');
+            $table->boolean('is_free_shipping')->default(0);
+            $table->boolean('is_hot')->default(0);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->timestamps();
         });
