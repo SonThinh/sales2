@@ -39,9 +39,9 @@ class ProductTransformer extends Transformer
             'description'       => (string) $product->description,
             'price'             => (string) $product->price,
             'discount'          => (string) $product->discount,
-            'is_hot'            => (int) $product->is_hot,
-            'is_free_shipping'  => (int) $product->is_free_shipping,
-            'category_id'       => (int) $product->category_id,
+            'is_hot'            => (boolean) $product->is_hot,
+            'is_free_shipping'  => (boolean) $product->is_free_shipping,
+            'category_id'       => (boolean) $product->category_id,
         ];
     }
 }
