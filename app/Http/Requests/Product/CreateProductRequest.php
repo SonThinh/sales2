@@ -20,8 +20,8 @@ class CreateProductRequest extends BaseRequest
             'price'	            => 'required|int|digits_between:1000,10000000',
             'discount'	        => 'required|int',
             'image'             => 'required|mimes:jpeg,jpg,png,gif',
-            'is_free_shipping'  => 'required|int|boolean',
-            'is_hot'	        => 'required|int|boolean',
+            'is_free_shipping'  => 'required|boolean',
+            'is_hot'	        => 'required|boolean',
             'category_id'       => 'required|int|exists:categories,id'
         ];
     }
