@@ -16,12 +16,12 @@ class CreateProductRequest extends BaseRequest
     {
         return [
             'product_name'	    => 'required|string|unique:products,product_name',
-            'description'	    => 'required|string|digits_between:20,300',
-            'price'	            => 'required|int|digits_between:1000,10000000',
-            'discount'	        => 'required|int',
+            'description'	    => 'required|string|min:20',
+            'price'	            => 'required|integer|digits_between:4,10',
             'image'             => 'required|mimes:jpeg,jpg,png,gif',
             'is_free_shipping'  => 'required|boolean',
             'is_hot'	        => 'required|boolean',
+            'discount'          => 'required|int|exists:discounts,id',
             'category_id'       => 'required|int|exists:categories,id'
         ];
     }

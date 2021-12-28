@@ -15,13 +15,13 @@ class UpdateProductRequest extends BaseRequest
     {
         return [
             'product_name'	    => 'sometimes|string|unique:products,product_name,'.$this->product->id,
-            'description'	    => 'sometimes|string|digits_between:20,300',
-            'price'	            => 'sometimes|int|digits_between:1000,10000000',
-            'discount'	        => 'sometimes|int',
+            'description'	    => 'sometimes|string|min:20',
+            'price'	            => 'sometimes|int|digits_between:4,8',
             'image'	            => 'nullable|mimes:jpeg,jpg,png,gif',
             'is_free_shipping'  => 'sometimes|boolean',
             'is_hot'	        => 'sometimes|boolean',
-            'category_id'       => 'sometimes|int|exists:categories,id'
+            'discount'          => 'sometimes|int|exists:discounts,id',
+            'category_id'       => 'sometimes|int|exists:categories,id',
         ];
     }
 }

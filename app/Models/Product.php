@@ -51,4 +51,9 @@ class Product extends Model
     {
         return $this->morphMany(File::class, 'fileable');
     }
+
+    public function discounts(): BelongsToMany
+    {
+        return $this->belongsToMany(Discount::class,'product_discount');
+    }
 }

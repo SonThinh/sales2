@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->string('description');
             $table->integer('price');
-            $table->integer('discount');
             $table->boolean('is_free_shipping')->default(0);
             $table->boolean('is_hot')->default(0);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();

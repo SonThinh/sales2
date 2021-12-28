@@ -13,7 +13,8 @@ class ProductTransformer extends Transformer
      * @var string[]
      */
     protected $relations = [
-        'files' => FileTransformer::class
+        'files'     => FileTransformer::class,
+        'discounts' => DiscountTransformer::class
     ];
 
     /**
@@ -22,7 +23,8 @@ class ProductTransformer extends Transformer
      * @var array
      */
     protected $load = [
-        'files' => FileTransformer::class
+        'files'     => FileTransformer::class,
+        'discounts'  => DiscountTransformer::class
     ];
 
     /**
@@ -38,7 +40,6 @@ class ProductTransformer extends Transformer
             'name'              => (string) $product->product_name,
             'description'       => (string) $product->description,
             'price'             => (string) $product->price,
-            'discount'          => (string) $product->discount,
             'is_hot'            => (boolean) $product->is_hot,
             'is_free_shipping'  => (boolean) $product->is_free_shipping,
             'category_id'       => (boolean) $product->category_id,

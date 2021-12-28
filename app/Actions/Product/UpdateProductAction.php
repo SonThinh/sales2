@@ -21,7 +21,8 @@ class UpdateProductAction extends BaseAction
     public function __invoke(Product $product, array $data): JsonResponse
     {
         return DB::transaction(function () use ($product, $data) {
-            $product->update($data);
+            $product->update(Arr::except($data, 'discount'));
+            $product->discounts()->sync($data['discount']);
 
             $file = new HandleImageService();
             $file->handleUpdateImage($product, $data);
